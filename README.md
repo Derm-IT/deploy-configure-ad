@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository details the steps to install and configure Active Directory Domain Services (AD DS) on a Windows Server 2022 virtual machine (DC-1) in Azure, set up remote desktop access for non-administrative users on a Windows 10 client machine (Client-1), and create multiple user accounts using PowerShell.
+This repository details the steps to configure Active Directory  on a Windows Server 2022 virtual machine (DC-1) in Azure, set up remote desktop access for non-administrative users on a Windows 10 client machine (Client-1), and create multiple user accounts using PowerShell.
 
 ## Prerequisites / Technologies Used
 
@@ -11,7 +11,8 @@ This repository details the steps to install and configure Active Directory Doma
     * Azure Virtual Machines (Windows Server 2022, Windows 10)
     * Azure Virtual Network (main-vnet)
 * Microsoft Windows Server 2022:
-    * Active Directory Domain Services (AD DS)
+    * Active Directory Domain Services (AD DS) Installed
+    * DC-1 promoted to Domain Controller
     * Server Manager
 * Microsoft Windows 10:
     * Remote Desktop Protocol (RDP)
@@ -23,43 +24,7 @@ This repository details the steps to install and configure Active Directory Doma
 
 ## Steps
 
-### Part 1: Install Active Directory and Promote DC-1
-
-#### 1. Install Active Directory Domain Services (AD DS)
-
-* Log into DC-1 via Remote Desktop.
-* Open Server Manager and click `Add roles and features` on Dashboard
-* ![image](https://github.com/user-attachments/assets/66d6a801-0543-40d2-b94b-dedeab15856a)
-* Next to server selection and pick `DC-1`
-* ![image](https://github.com/user-attachments/assets/b6f2ced9-41b5-4264-8a50-c87da634e3ce)
-* Server roles: check Active Directoy Domain Services and click add features
-* ![image](https://github.com/user-attachments/assets/0b3bea1a-aae5-435f-823d-58318e16b3e9)
-* Click next until confirmation and check restart box
-* ![image](https://github.com/user-attachments/assets/238589af-b8c1-4586-9e42-b7da90a34dfc)
-* Click install and wait
-* Complete the installation process.
-
-#### 2. Promote DC-1 as a Domain Controller
-
-* Go back to the Dashboard and notice the new `Rules and Server Groups Created`
-* Click the flag in the top right to open Post-Deployment Configuration notification
-* ![image](https://github.com/user-attachments/assets/b44d1eeb-6498-4154-9dc2-8ffe86fb43a9)
-* Promote DC-1 to a domain controller, check create a new forest and name it `mydomain.com`.
-* ![image](https://github.com/user-attachments/assets/978b514f-bcf2-4ba4-ae51-39bc6d11637d)
-* Head to Domain Controller Option and Set a DSRM password. Leave everything the same and click next
-* ![image](https://github.com/user-attachments/assets/63610e09-30aa-48a7-9064-c78761b3a710)
-* Uncheck DNS delegation and click next until Prerequisites Check and click Install
-* Wait for the server to restart
-* Reconnect with RDP but this time log in as a domain user
-   * To do that login as <domain-name\<domain-user>, so log back in as `mydomain.com\adminuser`.
-   * ![image](https://github.com/user-attachments/assets/a8e17459-1db2-4086-b4ee-c3efe3d5776a)
-   * Note: The account used to make DC-1 a DC is automatically a domain user so `adminuser` would also work
-* Open Command Prompt as Admin and run `WMIC COMPUTERSYSTEM GET DOMAINROLE` to check if DC-1 is not a DC
-* If it says 5 it worked, reference below on what each number means
-* ![image](https://github.com/user-attachments/assets/a30765db-43d8-4e07-a465-cf5acc5372ca)
-* ![image](https://github.com/user-attachments/assets/51c1445c-7393-47aa-b8db-8c806f132a84)
-
-DC-1 has now been successfully set up as Domain Controller running Active Directory Domain Services!
+### Part 1: Configuring the Domain Environment's Admins and Clients
 
 * Create a Domain Admin user within the domain.
     * In Active Directory Users and Computers (ADUC), create an Organizational Unit (OU) called “\_EMPLOYEES”.
@@ -94,13 +59,10 @@ DC-1 has now been successfully set up as Domain Controller running Active Direct
 
 ## Takeaways
 
-* Successfully installed and configured Active Directory Domain Services on a Windows Server 2022 VM in Azure.
-* Promoted the server to a domain controller and created a new domain.
 * Configured remote desktop access for domain users on a Windows 10 client machine.
 * Automated the creation of multiple user accounts using a PowerShell script.
 * Demonstrated proficiency in Active Directory administration and PowerShell scripting.
 * Understood how to create Organizational Units (OUs) and add users to security groups.
 * Learned how to join a windows 10 client machine to a domain.
 * Understood how to set remote desktop permissions for domain users.
-* Understood how to create mass user accounts using powershell.
-* Emphasized the importance of not deleting the VMs for future projects, and the proper way to save money on Azure VMs, by stopping them.
+
