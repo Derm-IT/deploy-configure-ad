@@ -1,4 +1,4 @@
-# Active Directory Domain Deployment and Configuration in Azure
+# Active Directory Domain Configuration in Azure
 
 ## Overview
 
