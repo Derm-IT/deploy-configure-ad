@@ -1,8 +1,8 @@
-# Active Directory Domain Configuration in Azure
+# Active Directory Configuration and Automation in Azure
 
 ## Overview
 
-This repository details the steps to configure Active Directory  on a Windows Server 2022 virtual machine (DC-1) in Azure, set up remote desktop access for non-administrative users on a Windows 10 client machine (Client-1), and create multiple user accounts using PowerShell.
+This repository details the process of refining a pre-existing Active Directory environment within Azure. It focuses on administrative user setup, client machine domain integration, remote desktop configuration for non-admin users, and automated mass user account creation using PowerShell. This builds upon an already deployed Windows Server 2022 Domain Controller (DC-1) and a Windows 10 client machine (Client-1), both residing within a configured Azure Virtual Network.
 
 ## Prerequisites / Technologies Used
 
