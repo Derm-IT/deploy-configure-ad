@@ -133,6 +133,7 @@ while ($count -lt $NUMBER_OF_ACCOUNTS_TO_CREATE) {
 * ![image](https://github.com/user-attachments/assets/3900ec1a-46c2-4bdc-9d08-b93a60cef746)
 * Note: you can decide how many accounts are created by changing the variable `$NUMBER_OF_ACCOUNTS_TO_CREATE`
 * Note: Ensure the spelling of "_EMPLOYEES" matches the Path defined in the script
+* Note: The New-ADUser cmdlet creates a user in Active Directory aka creates a Domain User
 * ![image](https://github.com/user-attachments/assets/17b0ed38-cd30-4562-a0f0-b920770ad481)
 * Run the script by clicking the green triangle and observe the creation of user accounts in the terminal.
 * ![image](https://github.com/user-attachments/assets/d2562d26-b84c-4e17-adf3-bdba858bfa28)
